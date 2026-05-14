@@ -1,26 +1,38 @@
 #!/usr/bin/env groovy
-
 pipeline {
-    agent none
+    agent any
+    tools {
+        maven 'maven-3.9'
+    }
     stages {
-        stage('build') {
+        stage("build jar") {
             steps {
                 script {
-                    echo "Building the application..."
+                    echo "building the application ...."
+                    sh "mvn clean package"
                 }
             }
         }
-        stage('test') {
+        stage("build image") {
             steps {
                 script {
-                    echo "Testing the application..."
+                    echo "building the docker image ...."
+                    withCredentials([usernamePassword(
+                        credentialsId: 'docker-hub-repo',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    )]) {
+                        sh 'docker build -t ighojohn/demo-app:2.1 .'
+                        sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
+                        sh 'docker push ighojohn/demo-app:2.1'
+                    }
                 }
             }
         }
-        stage('deploy') {
+        stage("deploy") {
             steps {
                 script {
-                    echo "Deploying the application..."
+                    echo "deploying the application ...."
                 }
             }
         }
