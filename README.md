@@ -1,7 +1,7 @@
 Project Overview
 This diagram illustrates a complete Jenkins CI/CD pipeline for a Java Maven Spring Boot application. The pipeline automates the entire software delivery process from the developer writing code to the application running on an AWS EC2 production server. Every git push to the GitHub repository automatically triggers the pipeline — no manual steps required.
 
-![Alt text](/)
+![Alt text](/jenkins-java-maven-pipeline.svg)
 
 What This Pipeline Does
 •	Automatically detects every code change pushed to GitHub via webhook
