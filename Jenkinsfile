@@ -3,18 +3,21 @@
 pipeline {
     agent none
     stages {
-        stage('build') {
-            steps {
-                script {
-                    echo "Building the application..."
-                }
-            }
-        }
-        stage('test') {
+     stage('test') {
             steps {
                 script {
                     echo "Testing the application..."
                 }
+                }
+            }
+        }
+        stage('build') {
+            when{
+                expression{
+                    BRANCH_NAME == 'master'
+            steps {
+                script {
+                    echo "Building the application..."
             }
         }
         stage('deploy') {
