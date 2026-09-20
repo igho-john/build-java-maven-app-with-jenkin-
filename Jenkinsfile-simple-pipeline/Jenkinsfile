@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage("build jar") {
             steps {
-                buildJar()
+                buildJar 'ighojohn/demo-app:jma-3.0'
             }
         }
         stage("build image") {
