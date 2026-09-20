@@ -14,12 +14,12 @@ pipeline {
         }
         stage("build image") {
             steps {
-                buildDockerImage("ighojohn/demo-app:jma-2.0")
+                buildImage("ighojohn/demo-app:jma-2.0")
             }
         }
         stage("docker login") {
             steps {
-                dockerLogin()
+                dockerlogin()
             }
         }
         stage("docker push") {
