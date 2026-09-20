@@ -1,6 +1,5 @@
 #!/usr/bin/env groovy
-@Library('jenkins-shared-library')
-def gv
+@Library('jenkins-shared-library') _
 
 pipeline {
     agent any
@@ -10,12 +9,22 @@ pipeline {
     stages {
         stage("build jar") {
             steps {
-                buildJar ()
+                buildJar()
             }
         }
         stage("build image") {
             steps {
-                buildImage 'ighojohn/demo-app:jma-2.0'
+                buildDockerImage("ighojohn/demo-app:jma-2.0")
+            }
+        }
+        stage("docker login") {
+            steps {
+                dockerLogin()
+            }
+        }
+        stage("docker push") {
+            steps {
+                dockerPush("ighojohn/demo-app:jma-2.0")
             }
         }
         stage("deploy") {
