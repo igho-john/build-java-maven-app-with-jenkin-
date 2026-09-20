@@ -24,9 +24,7 @@ pipeline {
         }
         stage("deploy") {
             steps {
-                script {
-                    //gv.deployApp()
-                }
+                echo "deploy stage placeholder"
             }
         }
     }
