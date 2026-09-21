@@ -18,7 +18,7 @@ pipeline {
         }
         stage("build image") {
             steps {
-                buildImage("ighojohn/demo-app:jma-2.0")
+                buildImage("ighojohn/demo-app:jma-2.3")
             }
         }
         stage("docker login") {
