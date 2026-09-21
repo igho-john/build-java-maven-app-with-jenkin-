@@ -8,7 +8,7 @@ pipeline {
         maven 'maven-3.9.16'
     }
     parameters {
-        choice(name: 'VERSION', choices: ['1.3.0', '1.4.0', '1.5.0'], description: '')
+        choice(name: 'VERSION', choices: ['1.3.0', '1.4.0', '1.5.5'], description: '')
         booleanParam(name: 'executeTests', defaultValue: true, description: '')
     }
     stages {
