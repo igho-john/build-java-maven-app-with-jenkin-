@@ -1,6 +1,9 @@
 #!/usr/bin/env groovy
-@Library('jenkins-shared-library')
-def gv
+library identifier: 'jenkins-shared-library@main', retriever: modernSCM(
+    [$class: 'GitSCMSource',
+     remote: 'https://github.com/igho-john/jenkins-shared-library.git',
+     credentialsId: 'github-credentials']
+)
 
 pipeline {
     agent any
@@ -15,7 +18,17 @@ pipeline {
         }
         stage("build image") {
             steps {
-                buildImage()
+                buildImage("ighojohn/demo-app:jma-2.0")
+            }
+        }
+        stage("docker login") {
+            steps {
+                dockerlogin()
+            }
+        }
+        stage("docker push") {
+            steps {
+                dockerPush("ighojohn/demo-app:jma-2.0")
             }
         }
         stage("deploy") {
