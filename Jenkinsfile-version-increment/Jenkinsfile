@@ -11,7 +11,7 @@ pipeline {
                 script {
                     echo 'incrementing app version...'
                     sh '''
-                        mvn build-helper:parse-version versions:set -DnewVersion=${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.nextIncrementalVersion} versions:commit
+                        mvn build-helper:parse-version versions:set -DnewVersion='${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.nextIncrementalVersion}' versions:commit
                     '''
                     def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
                     def version = matcher[0][1]
@@ -52,6 +52,10 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh 'git config --global user.email "jenkins@example.com"'
                         sh 'git config --global user.name "jenkins"'
+                        sh 'git status'
+                        sh 'git branch'
+                        sh 'git config --list'
+                        
                         sh "git remote set-url origin https://${USER}:${PASS}@github.com/igho-john/build-java-maven-app-with-jenkin-.git"
                         sh 'git add .'
                         sh 'git commit -m "ci: version bump"'
