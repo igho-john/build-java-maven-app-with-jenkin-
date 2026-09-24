@@ -6,18 +6,6 @@ pipeline {
         maven 'maven-3.9.16'
     }
     stages {
-        stage('check commit message') {
-            steps {
-                script {
-                    def commitMessage = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
-                    if (commitMessage.contains('[skip ci]')) {
-                        echo "Commit message contains [skip ci] — aborting build."
-                        currentBuild.result = 'NOT_BUILT'
-                        error("Skipping build due to [skip ci] marker.")
-                    }
-                }
-            }
-        }
         stage('increment version') {
             steps {
                 script {
@@ -67,7 +55,7 @@ pipeline {
                         sh 'git config --global user.name "jenkins"'
                         sh "git remote set-url origin https://${USER}:${PASS}@github.com/igho-john/build-java-maven-app-with-jenkin-.git"
                         sh 'git add .'
-                        sh 'git commit -m "ci: version bump [skip ci]"'
+                        sh 'git commit -m "ci: version bump"'
                         sh 'git push origin HEAD:main'
                     }
                 }
