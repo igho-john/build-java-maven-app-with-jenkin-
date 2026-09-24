@@ -47,6 +47,7 @@ pipeline {
                         sh "docker build -t ighojohn/demo-app:${IMAGE_NAME} ."
                         sh "echo $PASS | docker login -u $USER --password-stdin"
                         sh "docker push ighojohn/demo-app:${IMAGE_NAME}"
+                        sh "docker image prune -f"
                     }
                 }
             }
