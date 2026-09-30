@@ -6,16 +6,10 @@ pipeline {
             steps {
                 script {
                     echo "Testing the application..."
-                    echo "executing pipeline for branch ${BRANCH_NAME}"
                 }
             }
         }
         stage('build') {
-            when {
-                expression {
-                    BRANCH_NAME == 'master'
-                }
-            }
             steps {
                 script {
                     echo "Building the application..."
@@ -23,14 +17,12 @@ pipeline {
             }
         }
         stage('deploy') {
-            when {
-                expression {
-                    BRANCH_NAME == 'master'
-                }
-            }
             steps {
                 script {
-                    echo "Deploying the application..."
+                    def dockerCmd = 'docker run -p 80:3000 -d ighojohn/testing-app:23'
+                    sshagent(['ec2-server-key']) {
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@99.79.70.217 '${dockerCmd}'"
+                    }
                 }
             }
         }
