@@ -19,9 +19,9 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
-                    def dockerCmd = 'docker stop testing-app || true && docker rm testing-app || true && docker run -p 3000:80 -d --name testing-app ighojohn/testing-app:23'
                     sshagent(['ec2-server-key']) {
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@99.79.70.217 '${dockerCmd}'"
+                        sh "scp -o StrictHostKeyChecking=no docker-compose.yml ec2-user@99.79.70.217:/home/ec2-user/docker-compose.yml"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@99.79.70.217 'IMAGE_TAG=23 docker-compose -f /home/ec2-user/docker-compose.yml pull && IMAGE_TAG=23 docker-compose -f /home/ec2-user/docker-compose.yml up -d'"
                     }
                 }
             }
