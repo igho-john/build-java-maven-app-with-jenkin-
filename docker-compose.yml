@@ -1,10 +1,10 @@
 version: '3'
 services:
   demo-app:
-    image: ighojohn/demo-app:${IMAGE_TAG}
+    image: ighojohn/testing-app:${IMAGE_TAG}
     container_name: demo-app
     ports:
-      - "8080:8080"
+      - "8080:80"
   postgres-db:
     image: postgres:16
     container_name: postgres-db
@@ -12,4 +12,3 @@ services:
       - POSTGRES_PASSWORD=my_pwd
     ports:
       - "5432:5432"
-
