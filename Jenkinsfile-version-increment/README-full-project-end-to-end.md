@@ -1,5 +1,7 @@
 # Java Maven App — Complete CI/CD Pipeline on AWS EC2
 
+![Alt text](/)
+
 A fully automated, self-healing CI/CD pipeline for a Java Maven (Spring Boot)
 application. Every push to `main` is automatically versioned, built, tested,
 containerized, pushed to Docker Hub, and deployed to a live AWS EC2 instance
