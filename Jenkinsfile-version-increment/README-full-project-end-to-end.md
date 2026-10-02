@@ -1,6 +1,6 @@
 # Java Maven App — Complete CI/CD Pipeline on AWS EC2
 
-![Alt text](/)
+![Alt text](/Jenkinsfile-version-increment/complete-cicd-architecture-diagram.png)
 
 A fully automated, self-healing CI/CD pipeline for a Java Maven (Spring Boot)
 application. Every push to `main` is automatically versioned, built, tested,
