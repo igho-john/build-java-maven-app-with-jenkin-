@@ -1,4 +1,4 @@
-# DevOps Bootcamp — Jenkins CI/CD Projects
+# Jenkins CI/CD Projects
 
 A collection of Jenkins pipeline projects built while learning CI/CD,
 from basic syntax through a complete, production-style pipeline.
