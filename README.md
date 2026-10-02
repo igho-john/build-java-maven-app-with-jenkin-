@@ -11,7 +11,3 @@ from basic syntax through a complete, production-style pipeline.
 | [`Jenkinsfile-simple-pipeline/`](./Jenkinsfile-simple-pipeline) | Basic Jenkins pipeline using a Shared Library |
 | [`Jenkinsfile-kubernetes/`](./Jenkinsfile-kubernetes) | Early Kubernetes deployment exploration |
 | [`Jenkinsfile-syntax/`](./Jenkinsfile-syntax) | Jenkinsfile syntax practice and experiments |
-
-**Start here:** [`Jenkinsfile-version-increment/README.md`](./Jenkinsfile-version-increment/README.md)
-for the full, complete pipeline — this is the one that best represents
-what I can build end-to-end.
