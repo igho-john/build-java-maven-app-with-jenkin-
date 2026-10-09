@@ -9,11 +9,12 @@ pipeline {
             steps {
                 script {
                     def commitMessage = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
-                    if (commitMessage.contains('[skip ci]')) {
-                        echo "Commit message contains [skip ci] — skipping remaining stages."
+                    def startedByUser = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause').size() > 0
+                    if (commitMessage.contains('[skip ci]') && !startedByUser) {
+                        echo "Commit message contains [skip ci] and this was an automatic trigger — skipping remaining stages."
                         env.SKIP_BUILD = 'true'
                     } else {
-                        echo "No [skip ci] marker found — proceeding with build."
+                        echo "Proceeding with full build."
                         env.SKIP_BUILD = 'false'
                     }
                 }
